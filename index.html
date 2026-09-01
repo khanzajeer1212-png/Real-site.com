@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TradeXPro — Demo Trading</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#061021;color:#eef5ff;font-family:Arial,sans-serif}
+header{height:70px;border-bottom:1px solid #18345b;display:flex;align-items:center;justify-content:space-between;padding:0 22px;background:#071329}
+.logo{font-size:24px;font-weight:800;color:#29a8ff}.logo span{color:#fff}
+.balance{border:1px solid #087c72;border-radius:12px;padding:9px 16px;color:#00e0b0}
+.layout{display:grid;grid-template-columns:220px 1fr 300px;gap:16px;padding:16px}
+nav,.card{background:#0a1730;border:1px solid #193864;border-radius:14px}
+nav{padding:16px;min-height:calc(100vh - 102px)}
+nav button{width:100%;padding:13px;margin:5px 0;border:0;border-radius:10px;background:transparent;color:#b8c8e5;text-align:left;font-size:15px;cursor:pointer}
+nav button.active,nav button:hover{background:#1168e8;color:white}
+.hero{height:240px;padding:30px;border-radius:16px;background:linear-gradient(100deg,#08162c,#102b54);border:1px solid #1a4678}
+.hero h1{font-size:48px;margin:0;color:#fff}.hero h1 span{color:#168cff}.hero p{color:#aabbd7;font-size:17px}.cta{background:#148cff;border:0;color:white;padding:12px 22px;border-radius:9px;font-weight:700}
+.coins{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0}
+.coin{padding:14px}.coin b{display:block;font-size:18px}.up{color:#00dda9}.down{color:#ff5478}
+.chartbox{padding:14px;margin-top:10px}.chart{height:330px;position:relative;overflow:hidden;background:repeating-linear-gradient(0deg,transparent 0 65px,#132748 66px),repeating-linear-gradient(90deg,transparent 0 95px,#132748 96px)}
+svg{width:100%;height:100%}.trade{padding:16px}.tabs{display:flex;gap:8px}.tabs button{flex:1;padding:11px;border-radius:9px;border:1px solid #23528b;background:#0d2346;color:#bcd0ef}.tabs .sel{background:#08b98f;color:#fff}
+input{width:100%;padding:13px;background:#071329;border:1px solid #24476f;color:white;border-radius:8px;margin:12px 0}.buy,.sell{width:100%;padding:13px;border:0;border-radius:9px;font-weight:800;color:white;cursor:pointer}.buy{background:#00b987}.sell{background:#e83b68}
+.side h3{margin-top:0}.row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #173154;color:#c3d2ea}
+footer{text-align:center;color:#7185a7;padding:15px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.layout>nav{min-height:auto}.coins{grid-template-columns:repeat(2,1fr)}.side{display:none}.hero h1{font-size:38px}}
+</style>
+</head>
+<body>
+<header><div class="logo">◆ <span>Trade</span>XPro</div><div class="balance">Demo Balance: <b id="balance">$10,000.00</b></div></header>
+<div class="layout">
+<nav>
+<button class="active">⌂ Home</button><button>▥ Trade</button><button>◉ Markets</button><button>▣ Portfolio</button><button>◷ History</button><button>⚙ Settings</button>
+</nav>
+<main>
+<section class="hero"><h1>WORKING<br><span>SMART</span></h1><p>Better strategies. Bigger opportunities.<br>Practice trading with virtual money.</p><button class="cta" onclick="document.getElementById('trade').scrollIntoView()">Start Trading →</button></section>
+<div class="coins">
+<div class="card coin"><b>₿ BTC</b>$67,432 <span class="up">▲ 2.84%</span></div>
+<div class="card coin"><b>Ξ ETH</b>$3,289 <span class="up">▲ 3.21%</span></div>
+<div class="card coin"><b>◎ SOL</b>$152.76 <span class="up">▲ 4.12%</span></div>
+<div class="card coin"><b>◆ BNB</b>$602.31 <span class="up">▲ 1.76%</span></div>
+<div class="card coin"><b>✕ XRP</b>$0.5732 <span class="up">▲ 2.31%</span></div>
+</div>
+<section class="card chartbox"><h2>BTC/USDT <span class="up">▲ 2.84%</span></h2>
+<div class="chart"><svg viewBox="0 0 800 330" preserveAspectRatio="none"><polyline points="0,270 40,250 80,265 120,210 160,230 200,170 240,190 280,130 320,150 360,110 400,135 440,85 480,120 520,70 560,95 600,55 640,90 680,40 720,75 760,50 800,65" fill="none" stroke="#168cff" stroke-width="4"/><polygon points="0,270 40,250 80,265 120,210 160,230 200,170 240,190 280,130 320,150 360,110 400,135 440,85 480,120 520,70 560,95 600,55 640,90 680,40 720,75 760,50 800,65 800,330 0,330" fill="#168cff" opacity=".12"/></svg></div></section>
+<section id="trade" class="card trade"><h2>Demo Trade</h2><div class="tabs"><button class="sel" id="buyTab" onclick="mode('buy')">Buy</button><button id="sellTab" onclick="mode('sell')">Sell</button></div><input id="amount" type="number" min="1" value="100" placeholder="Amount (USD)"><button class="buy" id="tradeBtn" onclick="trade()">Buy BTC — Demo</button><p id="msg" style="color:#8fa6c8"></p></section>
+</main>
+<aside class="side">
+<section class="card trade"><h3>Top Movers</h3><div class="row"><span>BTC</span><span class="up">+2.84%</span></div><div class="row"><span>ETH</span><span class="up">+3.21%</span></div><div class="row"><span>SOL</span><span class="up">+4.12%</span></div><div class="row"><span>BNB</span><span class="up">+1.76%</span></div></section>
+<section class="card trade" style="margin-top:14px"><h3>Your Portfolio</h3><p>Total Balance</p><h2 id="portfolio">$10,000.00</h2><div class="row"><span>Profit/Loss</span><span id="pnl">$0.00</span></div><div class="row"><span>Trades</span><span id="trades">0</span></div></section>
+</aside>
+</div><footer>TradeXPro Demo • Virtual funds only • Not a real-money trading platform</footer>
+<script>
+let balance=10000, trades=0, pnl=0, current='buy';
+function mode(m){current=m;buyTab.className=m==='buy'?'sel':'';sellTab.className=m==='sell'?'sel':'';tradeBtn.className=m==='buy'?'buy':'sell';tradeBtn.textContent=(m==='buy'?'Buy':'Sell')+' BTC — Demo'}
+function trade(){let a=Number(amount.value);if(!a||a<1)return;balance += current==='buy' ? -a : a; trades++; pnl += current==='buy' ? -a*.01 : a*.01; document.getElementById('balance').textContent='$'+balance.toFixed(2);document.getElementById('portfolio').textContent='$'+balance.toFixed(2);document.getElementById('pnl').textContent=(pnl>=0?'+':'')+'$'+pnl.toFixed(2);document.getElementById('trades').textContent=trades;msg.textContent='Demo trade placed successfully. No real money was used.'}
+</script>
+</body></html>
